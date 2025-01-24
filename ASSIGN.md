@@ -12,7 +12,7 @@ The customer can view activity in the [Activity Log](https://portal.azure.com/#v
 
 Another recommended approach is to use Azure Policy at a management group scope to automatically assign the Azure Lighthouse definition.
 
-See <https://github.com/richeney/lighthouse_policy>.
+See <https://github.com/Cloud-Direct/Azure-Lighthouse-Policy-Definition>.
 
 ## PowerShell
 
