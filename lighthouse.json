@@ -1,0 +1,153 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "metadata": {
+                "description": "The GUID/UUID for the managed service offer. Do not change if only updating authorizations."
+            }
+        },
+        "display_name": {
+            "type": "string",
+            "metadata": {
+                "description": "The display name for the service provider offer."
+            }
+        },
+        "description": {
+            "type": "string",
+            "metadata": {
+                "description": "The description for the service provider offer."
+            }
+        },
+        "permanent": {
+            "type": "array",
+            "metadata": {
+                "description": "Array of objectIds for permanent authorizations."
+            },
+            "defaultValue": []
+        },
+        "eligible": {
+            "type": "array",
+            "metadata": {
+                "description": "Array of objectIds for PIM elevatable roles. The approval value must be either selfElevate, standardRoleApproval, or contributorRoleApproval."
+            },
+            "defaultValue": []
+        },
+        "lighthouse_admins": {
+            "type": "object",
+            "metadata": {
+                "description": "The management group objectId and name"
+            },
+            "defaultValue": {
+                "objectId": "68cdc804-aca6-498a-86b5-71f1f4d7093d",
+                "name": "Lighthouse Administrator group"
+            }
+        },
+        "approvers": {
+            "type": "object",
+            "metadata": {
+                "description": "Groups for PIM elevation approvals."
+            },
+            "defaultValue": {
+                "standard": {
+                    "name": "PIM approvals - Standard Roles",
+                    "objectId": "0b0b76e2-808a-404a-9c50-51bb28b5a85d"
+                },
+                "contributor": {
+                    "name": "PIM approvals - Contributor Role",
+                    "objectId": "af7551ad-9496-4d40-bc66-970ed3d42c1a"
+                }
+            }
+        }
+    },
+    "variables": {
+        "publisher": "Cloud Direct",
+        "tenantId": "2d2006bf-2fde-473c-8ce4-ea5307e8eb99",
+        "Backup Contributor": "5e467623-bb1f-42f4-a55d-6e525e11384b",
+        "Backup Operator": "00c29273-979b-4161-815c-10b084fb9324",
+        "Billing Reader": "fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64",
+        "Contributor": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+        "Cost Management Contributor": "434105ed-43f6-45c7-a02f-909b2ba83430",
+        "Cost Management Reader": "72fafb9e-0641-4937-9268-a91bfd8191a3",
+        "Key Vault Contributor": "f25e0fa2-a7c8-4377-a976-54943a77a395",
+        "Managed Services Registration Assignment Delete Role": "91c1777a-f3dc-4fae-b103-61d183457e46",
+        "Microsoft Sentinel Contributor": "ab8e14d6-4a74-4a29-9ba8-549422addade",
+        "Microsoft Sentinel Responder": "3e150937-b8fe-4cfb-8069-0eaf05ecd056",
+        "Monitoring Contributor": "749f88d5-cbae-40b8-bcfc-e573ddc772fa",
+        "Quota Request Operator": "0e5f05e5-9ab9-446b-b98d-1e2157c94125",
+        "Reader": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+        "Security Reader": "39bc4728-0917-49c7-9d2c-d95423bc2eb4",
+        "Support Request Contributor": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
+        "User Access Administrator": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+        "Virtual Machine Contributor": "9980e02c-c2be-4d73-94e8-173b1dc7cf3c",
+        "Virtual Machine Local User Login": "602da2ba-a5c2-41da-b01d-5360126ab525",
+        "managedServicesRegistrationAssignmentDelete": [
+            {
+                "principalId": "[parameters('lighthouse_admins').objectId]",
+                "principalIdDisplayName": "[parameters('lighthouse_admins').name]",
+                "roleDefinitionId": "[variables('Managed Services Registration Assignment Delete Role')]"
+            }
+        ],
+        "copy": [
+            {
+                "name": "Permanent",
+                "count": "[length(parameters('permanent'))]",
+                "input": {
+                    "principalIdDisplayName": "[parameters('permanent')[copyIndex('Permanent')].name]",
+                    "principalId": "[parameters('permanent')[copyIndex('Permanent')].objectId]",
+                    "roleDefinitionId": "[variables(parameters('permanent')[copyIndex('Permanent')].roleName)]"
+                }
+            },
+            {
+                "name": "Eligible",
+                "count": "[length(parameters('eligible'))]",
+                "input": {
+                    "principalIdDisplayName": "[parameters('eligible')[copyIndex('Eligible')].name]",
+                    "principalId": "[parameters('eligible')[copyIndex('Eligible')].objectId]",
+                    "roleDefinitionId": "[variables(parameters('eligible')[copyIndex('Eligible')].roleName)]",
+                    "justInTimeAccessPolicy": "[variables(parameters('eligible')[copyIndex('Eligible')].approval)]"
+                }
+            }
+        ],
+        "Self Elevate": {
+            "multiFactorAuthProvider": "Azure",
+            "maximumActivationDuration": "PT8H",
+            "managedByTenantApprovers": []
+        },
+        "Standard Role Approval": {
+            "multiFactorAuthProvider": "Azure",
+            "maximumActivationDuration": "PT8H",
+            "managedByTenantApprovers": [
+                {
+                    "principalId": "[parameters('approvers').standard.objectId]",
+                    "principalIdDisplayName": "[parameters('approvers').standard.name]"
+                }
+            ]
+        },
+        "Contributor Role Approval": {
+            "multiFactorAuthProvider": "Azure",
+            "maximumActivationDuration": "PT8H",
+            "managedByTenantApprovers": [
+                {
+                    "principalId": "[parameters('approvers').contributor.objectId]",
+                    "principalIdDisplayName": "[parameters('approvers').contributor.name]"
+                }
+            ]
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2022-10-01",
+            "name": "[parameters('name')]",
+            "properties": {
+                "registrationDefinitionName": "[parameters('display_name')]",
+                "description": "[parameters('description')]",
+                "managedByTenantId": "[variables('tenantId')]",
+                "authorizations": "[concat(variables('permanent'), variables('managedServicesRegistrationAssignmentDelete'))]",
+                "eligibleAuthorizations": "[variables('eligible')]"
+            }
+        }
+    ]
+}

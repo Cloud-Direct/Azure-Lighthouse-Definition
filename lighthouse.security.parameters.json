@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "d1d39aad-c16c-490a-909b-9445ec5b5575"
+    },
+    "display_name": {
+      "value": "Sentinel Managed Service"
+    },
+    "description": {
+      "value": "Sentinel Responder and Contributor roles"
+    },
+    "permanent": {
+      "value": [
+        {
+          "name": "Security",
+          "objectId": "38fbdc1d-fff7-49b3-9d04-51ee2741b293",
+          "roleName": "Reader"
+        },
+        {
+          "name": "Security",
+          "objectId": "38fbdc1d-fff7-49b3-9d04-51ee2741b293",
+          "roleName": "Security Reader"
+        },
+        {
+          "name": "Security",
+          "objectId": "38fbdc1d-fff7-49b3-9d04-51ee2741b293",
+          "roleName": "Microsoft Sentinel Responder"
+        }
+      ]
+    },
+    "eligible": {
+      "value": [
+        {
+          "name": "Security",
+          "objectId": "38fbdc1d-fff7-49b3-9d04-51ee2741b293",
+          "roleName": "Microsoft Sentinel Contributor",
+          "approval": "Standard Role Approval"
+        },
+        {
+          "name": "Security",
+          "objectId": "38fbdc1d-fff7-49b3-9d04-51ee2741b293",
+          "roleName": "Contributor",
+          "approval": "Contributor Role Approval"
+        }
+      ]
+    }
+  }
+}
