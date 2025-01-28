@@ -27,6 +27,11 @@
           "name": "Security",
           "objectId": "38fbdc1d-fff7-49b3-9d04-51ee2741b293",
           "roleName": "Microsoft Sentinel Responder"
+        },
+        {
+          "name": "Security",
+          "objectId": "38fbdc1d-fff7-49b3-9d04-51ee2741b293",
+          "roleName": "Support Request Contributor"
         }
       ]
     },
