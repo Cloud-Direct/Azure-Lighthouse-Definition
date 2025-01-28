@@ -16,16 +16,16 @@ The examples below create the standard definition at the current subscription sc
 
 ```shell
 az deployment sub create --location uksouth \
-  --template-uri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.0/lighthouse.json" \
-  --parameters "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.0/lighthouse.standard.parameters.json"
+  --template-uri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.1/lighthouse.json" \
+  --parameters "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.1/lighthouse.standard.parameters.json"
 ```
 
 ### PowerShell
 
 ```powershell
 New-AzSubscriptionDeployment -Location uksouth \
-  -TemplateUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.0/lighthouse.json" \
-  -TemplateParameterUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.0/lighthouse.standard.parameters.json"
+  -TemplateUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.1/lighthouse.json" \
+  -TemplateParameterUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.1/lighthouse.standard.parameters.json"
 ```
 
 
@@ -34,7 +34,7 @@ New-AzSubscriptionDeployment -Location uksouth \
 
 ```ruby
 module "standard_lighthouse_definition" {
-  source          = "github.com/Cloud-Direct/Azure-Lighthouse-Definition?ref=v1.0"
+  source          = "github.com/Cloud-Direct/Azure-Lighthouse-Definition?ref=v1.1"
   parms           = "lighthouse.standard.parameters.json"
   subscription_id = "00000000-0000-0000-0000-000000000000"
 }
