@@ -21,6 +21,11 @@
         {
           "name": "Tier 1",
           "objectId": "7c381bfd-fca1-4e96-a2d5-682ffb3f20a0",
+          "roleName": "Quota Request Operator"
+        }
+        {
+          "name": "Tier 1",
+          "objectId": "7c381bfd-fca1-4e96-a2d5-682ffb3f20a0",
           "roleName": "Support Request Contributor"
         },
         {
