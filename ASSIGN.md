@@ -18,18 +18,25 @@ See <https://github.com/Cloud-Direct/Azure-Lighthouse-Policy-Definition>.
 
 Example below. Replace the subscription IDs and definition name as applicable.
 
-1. Login to the right tenant
+1. Login to the right tenant and subscription
 
     ```powershell
     Connect-AzAccount -Tenant clouddirectdemo.net
+    Set-AzContext -SubscriptionId "0504ca0c-defa-456d-8d51-c2f19c022c3a"
+    Get-AzContext
     ```
 
 1. Get the definition as an object
 
     ```powershell
-    $lighthouseDefinition = Get-AzManagedServicesDefinition -Scope "/subscriptions/0504ca0c-defa-456d-8d51-c2f19c022c3a" \
-      | Where-Object { $_RegistrationDefinitionName -eq "Standard Managed Service" }
+    $lighthouseDefinition = Get-AzManagedServicesDefinition | Where-Object { $_RegistrationDefinitionName -eq "Standard Managed Service" }
     ```
+
+    Example resource ID:
+
+   ```text
+   /subscriptions/0504ca0c-defa-456d-8d51-c2f19c022c3a/providers/Microsoft.ManagedServices/registrationDefinitions/fc540e68-da34-42bd-8113-0fabd91d68cb
+   ```
 
 1. Assign the definition
 
