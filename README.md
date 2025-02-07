@@ -23,9 +23,7 @@ az deployment sub create --location uksouth \
 ### PowerShell
 
 ```powershell
-New-AzSubscriptionDeployment -Location uksouth \
-  -TemplateUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.2/lighthouse.json" \
-  -TemplateParameterUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.2/lighthouse.standard.parameters.json"
+New-AzSubscriptionDeployment -Location uksouth -TemplateUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.2/lighthouse.json" -TemplateParameterUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.2/lighthouse.standard.parameters.json"
 ```
 
 
