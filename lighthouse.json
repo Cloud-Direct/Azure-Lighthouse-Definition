@@ -151,7 +151,7 @@
             "properties": {
                 "registrationDefinitionName": "[parameters('display_name')]",
                 "description": "[parameters('description')]",
-                "managedByTenantId": "[variables('managed_by_tenant_id')]",
+                "managedByTenantId": "[parameters('managed_by_tenant_id')]",
                 "authorizations": "[concat(variables('permanent'), variables('managedServicesRegistrationAssignmentDelete'))]",
                 "eligibleAuthorizations": "[variables('eligible')]"
             }
