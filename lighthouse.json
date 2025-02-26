@@ -20,6 +20,13 @@
                 "description": "The description for the service provider offer."
             }
         },
+        "managed_by_tenant_id": {
+            "type": "string",
+            "metadata": {
+                "description": "The managed by tenant id for the managed service offer."
+            },
+            "defaultValue": "2d2006bf-2fde-473c-8ce4-ea5307e8eb99"
+        },
         "permanent": {
             "type": "array",
             "metadata": {
@@ -144,7 +151,7 @@
             "properties": {
                 "registrationDefinitionName": "[parameters('display_name')]",
                 "description": "[parameters('description')]",
-                "managedByTenantId": "[variables('tenantId')]",
+                "managedByTenantId": "[variables('managed_by_tenant_id')]",
                 "authorizations": "[concat(variables('permanent'), variables('managedServicesRegistrationAssignmentDelete'))]",
                 "eligibleAuthorizations": "[variables('eligible')]"
             }

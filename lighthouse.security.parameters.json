@@ -11,6 +11,9 @@
     "description": {
       "value": "Sentinel Responder and Contributor roles"
     },
+    "managed_by_tenant_id": {
+      "value": "2d2006bf-2fde-473c-8ce4-ea5307e8eb99"
+    },
     "permanent": {
       "value": [
         {

@@ -1,10 +1,11 @@
 locals {
-  parameters   = jsondecode(file("${path.module}/${var.parms}"))["parameters"]
-  name         = local.parameters.name.value
-  display_name = local.parameters.display_name.value
-  description  = local.parameters.description.value
-  permanent    = try(local.parameters.permanent.value, [])
-  eligible     = try(local.parameters.eligible.value, [])
+  parameters           = jsondecode(file("${path.module}/${var.parms}"))["parameters"]
+  name                 = local.parameters.name.value
+  display_name         = local.parameters.display_name.value
+  description          = local.parameters.description.value
+  managed_by_tenant_id = local.parameters.managed_by_tenant_id.value
+  permanent            = try(local.parameters.permanent.value, [])
+  eligible             = try(local.parameters.eligible.value, [])
 
   role_definition_id = {
     "Backup Contributor" : "5e467623-bb1f-42f4-a55d-6e525e11384b"
@@ -91,7 +92,7 @@ resource "azurerm_lighthouse_definition" "lighthouse" {
   lighthouse_definition_id = local.name
   name                     = local.display_name
   description              = local.description
-  managing_tenant_id       = "2d2006bf-2fde-473c-8ce4-ea5307e8eb99"
+  managing_tenant_id       = local.managed_by_tenant_id
   scope                    = "/subscriptions/${var.subscription_id}"
 
   dynamic "authorization" {
