@@ -16,14 +16,14 @@ The examples below create the standard definition at the current subscription sc
 
 ```shell
 az deployment sub create --location uksouth \
-  --template-uri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.4/lighthouse.json" \
-  --parameters "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.4/lighthouse.standard.parameters.json"
+  --template-uri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/v1.4/lighthouse.json" \
+  --parameters "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/v1.4/lighthouse.standard.parameters.json"
 ```
 
 ### PowerShell
 
 ```powershell
-New-AzSubscriptionDeployment -Location uksouth -TemplateUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.4/lighthouse.json" -TemplateParameterUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/refs/tags/v1.4/lighthouse.standard.parameters.json"
+New-AzSubscriptionDeployment -Location uksouth -TemplateUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/v1.4/lighthouse.json" -TemplateParameterUri "https://raw.githubusercontent.com/Cloud-Direct/Azure-Lighthouse-Definition/v1.4/lighthouse.standard.parameters.json"
 ```
 
 
